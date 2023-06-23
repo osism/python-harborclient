@@ -8,7 +8,9 @@ class Api:
     username: str = ""
     verify: bool = True
 
-    def __init__(self, url: str, password: str, username: str, verify: bool = True) -> None:
+    def __init__(
+        self, url: str, password: str, username: str, verify: bool = True
+    ) -> None:
         self.url = url
         self.password = password
         self.username = username
@@ -20,7 +22,7 @@ class Api:
         r = requests.get(
             url=f"{self.url}/{endpoint}",
             auth=(self.username, self.password),
-            verify=self.verify
+            verify=self.verify,
         )
         result = r.json()
 
@@ -34,7 +36,7 @@ class Api:
             url=f"{self.url}/{endpoint}",
             auth=(self.username, self.password),
             json=payload,
-            verify=self.verify
+            verify=self.verify,
         )
 
         # Catch error when r.json() is not available
@@ -46,6 +48,6 @@ class Api:
         if r.status_code != statuscode:
             print("Failed!")
             # add a dict key to identify if the result is an error message
-            result['is_failed'] = True
+            result["is_failed"] = True
 
         return result
